@@ -5,42 +5,42 @@ import WordDisplay from '../components/WordDisplay';
 
 describe('WordDisplay Component', () => {
   test('should render the word with guessed letters visible', () => {
-    const word = 'REACT';
-    const guessedLetters: Set<string> = new Set(['r', 'e', 'a']);
+    const word = 'VISION';
+    const guessedLetters: Set<string> = new Set(['v', 'i', 's']);
     
     render(<WordDisplay word={word} guessedLetters={guessedLetters} />);
     
-    const wordText = screen.getByText('R E A _ _');
+    const wordText = screen.getByText('V I S I _ _');
     expect(wordText).toBeInTheDocument();
   });
 
   test('should render all underscores when no letters are guessed', () => {
-    const word = 'HELLO';
+    const word = 'MISION';
     const guessedLetters: Set<string> = new Set();
     
     render(<WordDisplay word={word} guessedLetters={guessedLetters} />);
     
-    const wordText = screen.getByText('_ _ _ _ _');
+    const wordText = screen.getByText('_ _ _ _ _ _');
     expect(wordText).toBeInTheDocument();
   });
 
   test('should render complete word when all letters are guessed', () => {
-    const word = 'TEST';
-    const guessedLetters: Set<string> = new Set(['t', 'e', 's']);
+    const word = 'VALOR';
+    const guessedLetters: Set<string> = new Set(['v', 'a', 'l', 'o', 'r']);
     
     render(<WordDisplay word={word} guessedLetters={guessedLetters} />);
     
-    const wordText = screen.getByText('T E S T');
+    const wordText = screen.getByText('V A L O R');
     expect(wordText).toBeInTheDocument();
   });
 
   test('should display word length information', () => {
-    const word = 'PROGRAMMING';
+    const word = 'EMPRENDIMIENTO';
     const guessedLetters: Set<string> = new Set();
     
     render(<WordDisplay word={word} guessedLetters={guessedLetters} />);
     
-    const lengthText = screen.getByText('Letras: 11');
+    const lengthText = screen.getByText('Letras: 14');
     expect(lengthText).toBeInTheDocument();
   });
 
@@ -58,12 +58,12 @@ describe('WordDisplay Component', () => {
   });
 
   test('should handle words with repeated letters', () => {
-    const word = 'HELLO';
-    const guessedLetters: Set<string> = new Set(['l']);
+    const word = 'CALIDAD';
+    const guessedLetters: Set<string> = new Set(['a']);
     
     render(<WordDisplay word={word} guessedLetters={guessedLetters} />);
     
-    const wordText = screen.getByText('_ _ L L _');
+    const wordText = screen.getByText('_ A _ _ _ A _');
     expect(wordText).toBeInTheDocument();
   });
 });

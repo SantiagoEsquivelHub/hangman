@@ -14,7 +14,7 @@ describe('GameStatus Component', () => {
     render(
       <GameStatus 
         status="playing"
-        word="REACT"
+        word="LIDERAZGO"
         wrongGuesses={2}
         maxWrongGuesses={6}
         onRestart={mockOnRestart}
@@ -23,7 +23,7 @@ describe('GameStatus Component', () => {
     
     expect(screen.getByText('🎮 ¡Adivina la palabra!')).toBeInTheDocument();
     expect(screen.getByText('Te quedan 4 intentos')).toBeInTheDocument();
-    expect(screen.getByText('5 letras')).toBeInTheDocument();
+    expect(screen.getByText('9 letras')).toBeInTheDocument();
     expect(screen.getByText('2/6')).toBeInTheDocument();
   });
 
@@ -31,7 +31,7 @@ describe('GameStatus Component', () => {
     render(
       <GameStatus 
         status="won"
-        word="REACT"
+        word="LIDERAZGO"
         wrongGuesses={3}
         maxWrongGuesses={6}
         onRestart={mockOnRestart}
@@ -49,7 +49,7 @@ describe('GameStatus Component', () => {
     render(
       <GameStatus 
         status="lost"
-        word="REACT"
+        word="LIDERAZGO"
         wrongGuesses={6}
         maxWrongGuesses={6}
         onRestart={mockOnRestart}
@@ -57,7 +57,7 @@ describe('GameStatus Component', () => {
     );
     
     expect(screen.getByText('💀 ¡Perdiste!')).toBeInTheDocument();
-    expect(screen.getByText('La palabra era: REACT')).toBeInTheDocument();
+    expect(screen.getByText('La palabra era: LIDERAZGO')).toBeInTheDocument();
     
     const restartButton = screen.getByText('🔄 Jugar de nuevo');
     expect(restartButton).toBeInTheDocument();
@@ -67,7 +67,7 @@ describe('GameStatus Component', () => {
     render(
       <GameStatus 
         status="won"
-        word="REACT"
+        word="LIDERAZGO"
         wrongGuesses={3}
         maxWrongGuesses={6}
         onRestart={mockOnRestart}
@@ -84,7 +84,7 @@ describe('GameStatus Component', () => {
     render(
       <GameStatus 
         status="playing"
-        word="REACT"
+        word="LIDERAZGO"
         wrongGuesses={2}
         maxWrongGuesses={6}
         onRestart={mockOnRestart}
@@ -99,7 +99,7 @@ describe('GameStatus Component', () => {
     const { rerender } = render(
       <GameStatus 
         status="playing"
-        word="REACT"
+        word="LIDERAZGO"
         wrongGuesses={2}
         maxWrongGuesses={6}
         onRestart={mockOnRestart}
@@ -112,7 +112,7 @@ describe('GameStatus Component', () => {
     rerender(
       <GameStatus 
         status="won"
-        word="REACT"
+        word="LIDERAZGO"
         wrongGuesses={2}
         maxWrongGuesses={6}
         onRestart={mockOnRestart}
@@ -125,7 +125,7 @@ describe('GameStatus Component', () => {
     rerender(
       <GameStatus 
         status="lost"
-        word="REACT"
+        word="LIDERAZGO"
         wrongGuesses={6}
         maxWrongGuesses={6}
         onRestart={mockOnRestart}
@@ -140,14 +140,14 @@ describe('GameStatus Component', () => {
     render(
       <GameStatus 
         status="playing"
-        word="JAVASCRIPT"
+        word="EMPRENDIMIENTO"
         wrongGuesses={4}
         maxWrongGuesses={6}
         onRestart={mockOnRestart}
       />
     );
     
-    expect(screen.getByText('10 letras')).toBeInTheDocument();
+    expect(screen.getByText('14 letras')).toBeInTheDocument();
     expect(screen.getByText('4/6')).toBeInTheDocument();
   });
 
@@ -155,7 +155,7 @@ describe('GameStatus Component', () => {
     render(
       <GameStatus 
         status="playing"
-        word="TEST"
+        word="VALOR"
         wrongGuesses={0}
         maxWrongGuesses={6}
         onRestart={mockOnRestart}
@@ -170,7 +170,7 @@ describe('GameStatus Component', () => {
     render(
       <GameStatus 
         status="playing"
-        word="TEST"
+        word="VALOR"
         wrongGuesses={6}
         maxWrongGuesses={6}
         onRestart={mockOnRestart}

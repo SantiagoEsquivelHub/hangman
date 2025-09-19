@@ -11,7 +11,7 @@ describe('Keyboard Component', () => {
 
   test('should render all 26 letters', () => {
     const guessedLetters: Set<string> = new Set();
-    const word = 'TEST';
+    const word = 'VALOR';
     
     render(
       <Keyboard 
@@ -31,7 +31,7 @@ describe('Keyboard Component', () => {
 
   test('should call onGuess when a letter is clicked', () => {
     const guessedLetters: Set<string> = new Set();
-    const word = 'TEST';
+    const word = 'VALOR';
     
     render(
       <Keyboard 
@@ -50,8 +50,8 @@ describe('Keyboard Component', () => {
   });
 
   test('should show correct letters in green', () => {
-    const guessedLetters: Set<string> = new Set(['t', 'e']);
-    const word = 'TEST';
+    const guessedLetters: Set<string> = new Set(['v', 'a']);
+    const word = 'VALOR';
     
     render(
       <Keyboard 
@@ -62,16 +62,16 @@ describe('Keyboard Component', () => {
       />
     );
     
-    const letterT = screen.getByText('T');
-    const letterE = screen.getByText('E');
+    const letterV = screen.getByText('V');
+    const letterA = screen.getByText('A');
     
-    expect(letterT).toHaveClass('correct');
-    expect(letterE).toHaveClass('correct');
+    expect(letterV).toHaveClass('correct');
+    expect(letterA).toHaveClass('correct');
   });
 
   test('should show incorrect letters in red', () => {
     const guessedLetters: Set<string> = new Set(['x', 'y', 'z']);
-    const word = 'TEST';
+    const word = 'VALOR';
     
     render(
       <Keyboard 
@@ -93,7 +93,7 @@ describe('Keyboard Component', () => {
 
   test('should disable guessed letters', () => {
     const guessedLetters: Set<string> = new Set(['a', 'b']);
-    const word = 'TEST';
+    const word = 'VALOR';
     
     render(
       <Keyboard 
@@ -113,7 +113,7 @@ describe('Keyboard Component', () => {
 
   test('should disable all letters when disabled prop is true', () => {
     const guessedLetters: Set<string> = new Set();
-    const word = 'TEST';
+    const word = 'VALOR';
     
     render(
       <Keyboard 
@@ -132,7 +132,7 @@ describe('Keyboard Component', () => {
 
   test('should not call onGuess when disabled letter is clicked', () => {
     const guessedLetters: Set<string> = new Set(['a']);
-    const word = 'TEST';
+    const word = 'VALOR';
     
     render(
       <Keyboard 
@@ -151,7 +151,7 @@ describe('Keyboard Component', () => {
 
   test('should show unguessed letters with default styling', () => {
     const guessedLetters: Set<string> = new Set(['a']);
-    const word = 'TEST';
+    const word = 'VALOR';
     
     render(
       <Keyboard 
