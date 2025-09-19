@@ -1,106 +1,152 @@
+/* ==== util de accesibilidad ==== */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+/* ==== contenedor general, estilo manuscrito ==== */
 .hangman-drawing {
+  --scale: 1.25; /* 1 = original; 1.25 = 25% más grande */
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-}
-
-.gallows {
-  font-family: 'Courier New', monospace;
-  font-size: 1.2rem;
-  line-height: 1.2;
-  color: #8b4513;
+  gap: calc(14px * var(--scale));
   text-align: center;
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 10px;
-  border: 2px solid #8b4513;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  /* tu fuente de tiza como prioritaria */
+  font-family: "Very Simple Chalk", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #222;
 }
 
-.gallows-top {
-  font-weight: bold;
-  color: #654321;
+/* Modificador opcional para aún más tamaño */
+.hangman-drawing.xl { --scale: 1.6; }
+
+/* ==== “gallows” sin caja: efecto tiza sobre el fondo actual ==== */
+.gallows {
+  /* monoespaciado para alineación ASCII + look de tiza */
+  font-family: "Very Simple Chalk", "Courier New", monospace;
+  font-size: calc(1.25rem * var(--scale));
+  line-height: calc(1.25 * var(--scale));
+  color: #2e2e2e;
+  text-align: center;
+
+  /* SIN fondo sólido ni marco: más “dibujado” */
+  background: transparent;
+  padding: calc(10px * var(--scale)) calc(6px * var(--scale));
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+
+  /* Polvo de tiza */
+  text-shadow:
+    0 0.6px 0 rgba(0,0,0,0.12),
+    0 0 8px rgba(255,255,255,0.22);
 }
 
-.gallows-rope {
-  color: #654321;
-  font-weight: bold;
+.gallows-top,
+.gallows-rope,
+.gallows-base,
+.ground {
+  color: #47413a; /* marrón/creta suave */
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  display: block;
 }
 
+/* piezas del muñeco */
 .hangman-parts {
-  margin: 5px 0;
+  margin: calc(6px * var(--scale)) 0 calc(4px * var(--scale));
 }
 
 .head {
-  font-size: 1.5rem;
-  height: 1.5rem;
+  font-size: calc(1.6rem * var(--scale));
+  height: calc(1.6rem * var(--scale));
   line-height: 1;
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.3));
 }
 
-.body-line {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 1.2rem;
-  line-height: 1;
-}
-
-.left-arm, .right-arm, .body {
-  width: 1rem;
-  text-align: center;
-  color: #e74c3c;
-  font-weight: bold;
-}
-
+.body-line,
 .legs-line {
   display: flex;
   justify-content: center;
-  gap: 0;
-  height: 1.2rem;
+  align-items: center;
+  height: calc(1.25rem * var(--scale));
   line-height: 1;
 }
 
-.left-leg, .right-leg {
-  width: 1rem;
+.left-arm, .right-arm, .body, .left-leg, .right-leg {
+  width: calc(1.1rem * var(--scale));
   text-align: center;
-  color: #e74c3c;
-  font-weight: bold;
+  color: #b03a48;        /* tiza rojiza */
+  font-weight: 400;
+  text-shadow:
+    0 0.4px 0 rgba(0,0,0,0.08),
+    0 0 6px rgba(255,255,255,0.2);
 }
 
-.gallows-base {
-  color: #654321;
-  font-weight: bold;
-}
-
-.ground {
-  color: #654321;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
+/* ===== contador “a mano”: subrayado tipo marcador, no chip ===== */
 .wrong-count {
-  background: #f39c12;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 1.1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: calc(1.05rem * var(--scale));
+  font-weight: 400;
+  color: #222;
+  line-height: 1.3;
+  display: inline-block;
+  padding: 0 .25em .05em;
+
+  /* subrayado “marcador” con color de alerta suave */
+  --highlight: rgba(243, 156, 18, .22);
+  background-image: linear-gradient(to bottom, transparent 62%, var(--highlight) 0);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+
+  /* un toque orgánico al pasar el mouse */
+  transition: transform .2s ease;
+}
+.wrong-count:hover {
+  transform: rotate(-0.4deg);
 }
 
+/* ===== animaciones sutiles por etapa ===== */
+@keyframes rope-wiggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-1.2deg); }
+  50% { transform: rotate(0.8deg); }
+  75% { transform: rotate(-0.6deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes head-pop {
+  0% { transform: translateY(-2px) scale(0.96); opacity: .9; }
+  60% { transform: translateY(0) scale(1.04); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Cada vez que cambia la etapa, aplicamos animaciones cortas */
+.hangman-drawing[class*="stage-"] .gallows-rope { animation: rope-wiggle .35s ease-out; }
+.hangman-drawing[class*="stage-"] .head { animation: head-pop .35s ease-out; }
+
+/* ===== responsivo ===== */
 @media (max-width: 768px) {
-  .gallows {
-    font-size: 1rem;
-    padding: 15px;
+  /* reduce un poco la escala para evitar desbordes */
+  .hangman-drawing { --scale: 1.15; }
+
+  .gallows { font-size: calc(1.05rem * var(--scale)); padding: calc(6px * var(--scale)); }
+  .head { font-size: calc(1.4rem * var(--scale)); height: calc(1.4rem * var(--scale)); }
+  .wrong-count { font-size: calc(1rem * var(--scale)); }
+}
+
+/* ===== modo oscuro: ASCII un poco más claro ===== */
+@media (prefers-color-scheme: dark) {
+  .gallows-top,
+  .gallows-rope,
+  .gallows-base,
+  .ground {
+    color: #b7a590;
   }
-  
-  .head {
-    font-size: 1.3rem;
-  }
-  
-  .wrong-count {
-    font-size: 1rem;
-    padding: 8px 16px;
+  .left-arm, .right-arm, .body, .left-leg, .right-leg {
+    color: #f08da0;
   }
 }

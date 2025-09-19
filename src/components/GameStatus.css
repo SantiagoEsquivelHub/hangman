@@ -1,123 +1,160 @@
+/* === Estilo manuscrito para estados del juego === */
+
 .game-status {
-  text-align: center;
-  padding: 20px;
-  border-radius: 15px;
-  margin: 20px 0;
-  transition: all 0.3s ease;
-}
-
-.status-playing {
-  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-  color: white;
-}
-
-.status-won {
-  background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
-  color: white;
-  animation: celebration 0.6s ease-in-out;
-}
-
-.status-lost {
-  background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
-  color: white;
-}
-
-@keyframes celebration {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-.status-title {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.status-message {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  opacity: 0.95;
-}
-
-.game-over-actions {
-  margin: 20px 0;
-}
-
-.restart-button {
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  padding: 12px 24px;
-  border-radius: 25px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.restart-button:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.restart-button:active {
-  transform: translateY(0);
-}
-
-.game-stats {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-  gap: 20px;
-}
-
-.stat {
+  /* Layout básico + más espacio vertical entre bloques */
   display: flex;
   flex-direction: column;
+  gap: clamp(12px, 2.5vw, 20px);
+
+  text-align: center;
+  margin: 20px 0;
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+  border-radius: 0; /* sin caja */
+  transition: transform .25s ease, opacity .25s ease;
+
+  /* tipografía */
+  font-family: "Very Simple Chalk", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #222;
+
+  /* ligero “temblor” al pasar el mouse (orgánico) */
+  will-change: transform;
+}
+.game-status:hover {
+  transform: rotate(-0.3deg);
+}
+
+/* Header semántico (opcional) */
+.game-status__header { margin: 0; }
+
+/* Colores de acento por estado (texto y subrayados) */
+.status-playing { --accent: #0a66c2; --highlight: rgba(10, 102, 194, .18); }
+.status-won     { --accent: #0a8f5b; --highlight: rgba(0, 184, 148, .20); }
+.status-lost    { --accent: #c0396d; --highlight: rgba(232, 67, 147, .18); }
+
+/* Título “escrito a tiza” */
+.status-title {
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--accent, #333);
+  letter-spacing: 0.5px;
+  line-height: 1.6;             /* más aire entre líneas */
+  margin: 0;                    /* el gap del contenedor separa */
+
+  /* efecto tiza con varias sombras suaves */
+  text-shadow:
+    0 0.5px 0 rgba(0,0,0,.15),
+    0 1px 0 rgba(0,0,0,.12),
+    0 0 6px rgba(255,255,255,.25);
+  display: inline-block;
+
+  /* subrayado “marcador” irregular */
+  background-image: linear-gradient(to bottom, transparent 60%, var(--highlight, rgba(0,0,0,.12)) 0);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0 .2em .05em;
+}
+
+/* Mensaje con “marcador pastel” detrás */
+.status-message {
+  font-size: 1.15rem;
+  opacity: .95;
+  display: inline;
+  line-height: 1.6;             /* más aire entre líneas */
+  margin: 0;
+
+  background-image: linear-gradient(to bottom, transparent 65%, var(--highlight, rgba(0,0,0,.08)) 0);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0 .2em .05em;
+}
+
+/* micro-celebración, más sutil y manuscrita */
+@keyframes celebration {
+  0%   { transform: rotate(-0.6deg) scale(1); }
+  50%  { transform: rotate(0.4deg)  scale(1.04); }
+  100% { transform: rotate(-0.6deg) scale(1); }
+}
+.status-won {
+  animation: celebration .7s ease-in-out;
+}
+
+/* Botón: borde “handmade”, sin caja sólida */
+.game-over-actions { margin: 0; }
+.restart-button {
+  background: transparent;
+  color: var(--accent, #333);
+  border: 2px dashed currentColor;        /* borde tipo trazos */
+  border-radius: 999px;                    /* píldora suave */
+  padding: 10px 22px;
+  font-size: 1.05rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: transform .2s ease, letter-spacing .2s ease, filter .2s ease;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+.restart-button:hover {
+  transform: translateY(-2px) rotate(-0.5deg);
+  letter-spacing: .5px;
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,.1));
+}
+.restart-button:active {
+  transform: translateY(0) rotate(0deg);
+}
+
+/* Stats “a mano”: sin cajas, con subrayado punteado */
+.game-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  margin: 0;
+}
+.stat {
+  display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
 }
-
 .stat-label {
-  font-size: 0.9rem;
-  opacity: 0.8;
-  font-weight: 500;
+  font-size: .95rem;
+  opacity: .85;
+  font-weight: 400;
+  color: #444;
 }
-
 .stat-value {
-  font-size: 1.2rem;
-  font-weight: bold;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 8px 12px;
-  border-radius: 10px;
-  min-width: 60px;
+  font-size: 1.15rem;
+  font-weight: 400;
+  background: transparent;
+  padding: 0 2px 2px;
+  border-radius: 0;
+  min-width: auto;
+  border-bottom: 2px dotted var(--accent, #999);  /* subrayado punteado */
+  font-variant-numeric: tabular-nums;
 }
 
+/* Reset de márgenes de dt/dd para que no sumen separación extra */
+.game-stats dt,
+.game-stats dd { margin: 0; }
+
+/* Responsivo */
 @media (max-width: 768px) {
-  .status-title {
-    font-size: 1.5rem;
-  }
-  
-  .status-message {
-    font-size: 1.1rem;
-  }
-  
+  .game-status   { gap: clamp(14px, 3vw, 22px); }
+  .status-title  { font-size: 1.7rem; line-height: 1.7; }
+  .status-message{ font-size: 1.05rem; line-height: 1.7; }
+
   .restart-button {
-    padding: 10px 20px;
+    padding: 9px 18px;
     font-size: 1rem;
   }
-  
+
   .game-stats {
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    gap: 8px;
   }
-  
   .stat {
-    flex-direction: row;
-    justify-content: space-between;
+    gap: 10px;
   }
 }

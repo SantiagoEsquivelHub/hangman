@@ -1,50 +1,117 @@
+/* Escala coherente con el resto (más grande) */
 .word-display {
+  --scale: 1.25; /* antes ~1.1 — ahora todo un poco más grande */
   text-align: center;
-  padding: 20px 0;
+  padding: calc(20px * var(--scale)) 0;
+  margin-block: clamp(8px, 2vh, 24px); /* evita que quede pegado arriba */
+  font-family: "Very Simple Chalk", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #222;
 }
 
+/* Centrado vertical opcional dentro de su contenedor */
+.word-display.centered {
+  min-height: 30vh;            /* crea espacio vertical para poder centrar */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     /* centra verticalmente el contenido */
+}
+
+/* Línea de palabra con look de marcador/tiza */
 .word-text {
-  font-family: 'Courier New', monospace;
-  font-size: 3rem;
-  font-weight: bold;
-  color: #2c3e50;
-  letter-spacing: 8px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  gap: calc(12px * var(--scale));
+  align-items: center;
+  justify-content: center;
+
+  /* tamaño y tracking (más grande) */
+  font-size: calc(3rem * var(--scale));   /* antes ~2.6rem */
+  font-weight: 400;
+  letter-spacing: calc(5px * var(--scale));
+  margin: 0 0 calc(14px * var(--scale));
+
+  /* ligero polvo de tiza */
+  text-shadow:
+    0 0.6px 0 rgba(0,0,0,0.12),
+    0 0 8px rgba(255,255,255,0.22);
 }
 
+/* Cada “celda” de letra */
+.letter {
+  position: relative;
+  display: inline-flex;
+  min-width: 0.75em;
+  justify-content: center;
+  align-items: center;
+}
+
+.letter.symbol.space {
+  width: calc(18px * var(--scale));
+}
+
+/* Subrayado punteado para letras sin revelar */
+.letter.placeholder .letter-inner {
+  color: #2c3e50;
+  text-decoration: none;
+  position: relative;
+}
+.letter.placeholder .letter-inner::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -0.18em;
+  height: 2px;
+  border-bottom: 2px dotted rgba(44,62,80,0.7);
+}
+
+/* Letra revelada con “pop” sutil */
+.letter.revealed .letter-inner {
+  animation: reveal-pop .25s ease-out;
+  color: #2c3e50;
+}
+
+@keyframes reveal-pop {
+  0%   { transform: translateY(-2px) scale(0.96); opacity: .9; }
+  60%  { transform: translateY(0)     scale(1.06); opacity: 1; }
+  100% { transform: translateY(0)     scale(1);    opacity: 1; }
+}
+
+/* Info de palabra con estilo manuscrito (sin chip) */
 .word-info {
   display: flex;
   justify-content: center;
-  gap: 20px;
 }
 
 .word-length {
-  background: #3498db;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 0.9rem;
+  font-size: calc(1.05rem * var(--scale));
+  font-weight: 400;
+  color: #222;
+  line-height: 1.35;
+  display: inline-block;
+  padding: 0 .3em .08em;
+
+  /* subrayado tipo marcador */
+  --highlight: rgba(10, 102, 194, .20); /* azul suave; armoniza con status-playing */
+  background-image: linear-gradient(to bottom, transparent 62%, var(--highlight) 0);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
+/* Responsivo */
 @media (max-width: 768px) {
+  .word-display { --scale: 1.1; }
   .word-text {
-    font-size: 2rem;
-    letter-spacing: 4px;
+    font-size: calc(2.4rem * var(--scale));
+    letter-spacing: calc(4px * var(--scale));
+    gap: calc(10px * var(--scale));
   }
-  
-  .word-info {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
+  .word-length { font-size: calc(0.98rem * var(--scale)); }
 }
 
 @media (max-width: 480px) {
+  .word-display { --scale: 1.0; }
   .word-text {
-    font-size: 1.5rem;
-    letter-spacing: 2px;
+    font-size: calc(2rem * var(--scale));
+    letter-spacing: calc(3px * var(--scale));
+    gap: calc(8px * var(--scale));
   }
+  .word-length { font-size: calc(0.95rem * var(--scale)); }
 }

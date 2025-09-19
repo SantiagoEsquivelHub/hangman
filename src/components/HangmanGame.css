@@ -1,18 +1,79 @@
 .hangman-game {
+  /* === Patrón de papel cuadriculado (sin imagen) === */
+  --bg: #ffffff;           /* blanco limpio */
+  --line: rgba(0, 0, 0, 0.06);  /* línea fina suave */
+  --thick: rgba(0, 0, 0, 0.10); /* línea gruesa suave */
+  --step: 24px;            /* tamaño del cuadro */
+  --thin-w: 1px;           /* grosor línea fina */
+  --thick-w: 1.25px;       /* grosor línea gruesa */
+
+  position: relative;
   max-width: 1200px;
   width: 100%;
   padding: 20px;
+
+  /* Esquinas redondeadas + recorte del fondo al radio */
+  border-radius: 20px;
+  overflow: hidden;
+
+  /* Fondo blanco y cuadrícula siempre visible */
+  background-color: var(--bg);
+  background-image:
+    /* verticales finas */
+    repeating-linear-gradient(
+      to right,
+      var(--line) 0,
+      var(--line) var(--thin-w),
+      transparent var(--thin-w),
+      transparent var(--step)
+    ),
+    /* horizontales finas */
+    repeating-linear-gradient(
+      to bottom,
+      var(--line) 0,
+      var(--line) var(--thin-w),
+      transparent var(--thin-w),
+      transparent var(--step)
+    ),
+    /* verticales gruesas cada 5 */
+    repeating-linear-gradient(
+      to right,
+      transparent 0,
+      transparent calc(var(--step) * 5 - var(--thick-w)),
+      var(--thick) calc(var(--step) * 5 - var(--thick-w)),
+      var(--thick) calc(var(--step) * 5)
+    ),
+    /* horizontales gruesas cada 5 */
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--step) * 5 - var(--thick-w)),
+      var(--thick) calc(var(--step) * 5 - var(--thick-w)),
+      var(--thick) calc(var(--step) * 5)
+    );
+
+  /* (Opcional) un ligero borde para resaltar el radio */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  outline: 1px solid rgba(0,0,0,0.04);
 }
 
+/* Quitamos el velo: ya no oscurece el fondo */
+.hangman-game::before {
+  content: none;
+}
+
+/* Contenedor principal: transparente para que se vea la cuadrícula */
 .game-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  background: white;
-  border-radius: 20px;
+  background: transparent;   /* deja ver el patrón */
+  border-radius: 16px;        /* radio interno suave (opcional) */
   padding: 30px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   min-height: 600px;
+  position: relative;
+  z-index: 1;
 }
 
 .game-left {
@@ -36,8 +97,9 @@
     padding: 20px;
     min-height: auto;
   }
-  
+
   .hangman-game {
     padding: 10px;
+    background-attachment: scroll; /* mejor rendimiento en móvil */
   }
 }
