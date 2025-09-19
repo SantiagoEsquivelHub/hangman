@@ -1,16 +1,38 @@
+/* 1) Registrar la fuente */
+@font-face {
+  font-family: "Very Simple Chalk";
+  src:
+    url("./assets/Very Simple Chalk.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 2) Fuente por defecto para toda la app */
+:root {
+  --app-font: "Very Simple Chalk", system-ui, -apple-system, "Segoe UI",
+              Roboto, Arial, sans-serif;
+}
+
+/* 3) Tu reset + tipografía global */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
-  color: #333;
+html, body, #root {
+  min-height: 100%;
 }
 
-#root {
-  min-height: 100vh;
+body {
+  font-family: var(--app-font);
+  background: #6baae9;   /* sin comillas */
+  color: #333;
+  line-height: 1.4;
+}
+
+/* Asegurar misma fuente en controles form si algún navegador no hereda */
+button, input, select, textarea {
+  font-family: var(--app-font);
 }
