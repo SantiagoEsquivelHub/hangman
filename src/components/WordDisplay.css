@@ -1,0 +1,50 @@
+.word-display {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.word-text {
+  font-family: 'Courier New', monospace;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #2c3e50;
+  letter-spacing: 8px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.word-info {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.word-length {
+  background: #3498db;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .word-text {
+    font-size: 2rem;
+    letter-spacing: 4px;
+  }
+  
+  .word-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .word-text {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+}

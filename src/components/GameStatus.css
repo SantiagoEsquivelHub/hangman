@@ -1,0 +1,123 @@
+.game-status {
+  text-align: center;
+  padding: 20px;
+  border-radius: 15px;
+  margin: 20px 0;
+  transition: all 0.3s ease;
+}
+
+.status-playing {
+  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+  color: white;
+}
+
+.status-won {
+  background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+  color: white;
+  animation: celebration 0.6s ease-in-out;
+}
+
+.status-lost {
+  background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+  color: white;
+}
+
+@keyframes celebration {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.status-title {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.status-message {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  opacity: 0.95;
+}
+
+.game-over-actions {
+  margin: 20px 0;
+}
+
+.restart-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.restart-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.restart-button:active {
+  transform: translateY(0);
+}
+
+.game-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 12px;
+  border-radius: 10px;
+  min-width: 60px;
+}
+
+@media (max-width: 768px) {
+  .status-title {
+    font-size: 1.5rem;
+  }
+  
+  .status-message {
+    font-size: 1.1rem;
+  }
+  
+  .restart-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  
+  .game-stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .stat {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

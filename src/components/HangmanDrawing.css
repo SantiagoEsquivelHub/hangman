@@ -1,0 +1,106 @@
+.hangman-drawing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.gallows {
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  color: #8b4513;
+  text-align: center;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #8b4513;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gallows-top {
+  font-weight: bold;
+  color: #654321;
+}
+
+.gallows-rope {
+  color: #654321;
+  font-weight: bold;
+}
+
+.hangman-parts {
+  margin: 5px 0;
+}
+
+.head {
+  font-size: 1.5rem;
+  height: 1.5rem;
+  line-height: 1;
+}
+
+.body-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.2rem;
+  line-height: 1;
+}
+
+.left-arm, .right-arm, .body {
+  width: 1rem;
+  text-align: center;
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.legs-line {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  height: 1.2rem;
+  line-height: 1;
+}
+
+.left-leg, .right-leg {
+  width: 1rem;
+  text-align: center;
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.gallows-base {
+  color: #654321;
+  font-weight: bold;
+}
+
+.ground {
+  color: #654321;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.wrong-count {
+  background: #f39c12;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .gallows {
+    font-size: 1rem;
+    padding: 15px;
+  }
+  
+  .head {
+    font-size: 1.3rem;
+  }
+  
+  .wrong-count {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}

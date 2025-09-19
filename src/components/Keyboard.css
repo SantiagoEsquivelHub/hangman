@@ -1,0 +1,84 @@
+.keyboard {
+  width: 100%;
+}
+
+.keyboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+  gap: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.keyboard-key {
+  background: #ecf0f1;
+  border: 2px solid #bdc3c7;
+  border-radius: 8px;
+  padding: 12px 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyboard-key:hover:not(:disabled) {
+  background: #d5dbdb;
+  border-color: #95a5a6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.keyboard-key:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.keyboard-key.correct {
+  background: #2ecc71;
+  border-color: #27ae60;
+  color: white;
+  cursor: not-allowed;
+}
+
+.keyboard-key.incorrect {
+  background: #e74c3c;
+  border-color: #c0392b;
+  color: white;
+  cursor: not-allowed;
+}
+
+.keyboard-key:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  .keyboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
+    gap: 6px;
+  }
+  
+  .keyboard-key {
+    padding: 10px 6px;
+    font-size: 1rem;
+    min-height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .keyboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+    gap: 4px;
+  }
+  
+  .keyboard-key {
+    padding: 8px 4px;
+    font-size: 0.9rem;
+    min-height: 40px;
+  }
+}
